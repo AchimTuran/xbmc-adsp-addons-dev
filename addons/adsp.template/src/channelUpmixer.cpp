@@ -551,6 +551,7 @@ void from_stereo_to_3_1( float **Array_in, float **Array_out, unsigned int Sampl
 	for( unsigned int ii = 0; ii < Samples; ii++ )
 	{
 		Array_out[AE_DSP_CH_LFE][ii] = (Array_in[AE_DSP_CH_FL][ii] + Array_in[AE_DSP_CH_FR][ii])/2.0f;
+		Array_out[AE_DSP_CH_FC][ii] = Array_out[AE_DSP_CH_LFE][ii];
 	}
 }
 
@@ -757,7 +758,6 @@ void from_stereo_to_5_1_side( float **Array_in, float **Array_out, unsigned int 
 {
 	memcpy( Array_out[AE_DSP_CH_FL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
 	memcpy( Array_out[AE_DSP_CH_FR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
-	
 	memcpy( Array_out[AE_DSP_CH_SL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
 	memcpy( Array_out[AE_DSP_CH_SR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
 
@@ -770,26 +770,82 @@ void from_stereo_to_5_1_side( float **Array_in, float **Array_out, unsigned int 
 
 void from_2_1_to_5_1_side( float **Array_in, float **Array_out, unsigned int Samples )
 {
+	memcpy( Array_out[AE_DSP_CH_FL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_FR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_LFE], Array_in[AE_DSP_CH_LFE], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_SL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_SR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
+
+	for( unsigned int ii = 0; ii < Samples; ii++ )
+	{
+		Array_out[AE_DSP_CH_FC][ii] = (Array_in[AE_DSP_CH_FL][ii] + Array_in[AE_DSP_CH_FR][ii])/2.0f;
+	}
 }
 
 void from_3_0_to_5_1_side( float **Array_in, float **Array_out, unsigned int Samples )
 {
+	memcpy( Array_out[AE_DSP_CH_FL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_FR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_FC], Array_in[AE_DSP_CH_FC], Samples*sizeof(float) );
+
+	for( unsigned int ii = 0; ii < Samples; ii++ )
+	{
+		Array_out[AE_DSP_CH_LFE][ii] = (Array_in[AE_DSP_CH_FL][ii] + Array_in[AE_DSP_CH_FR][ii] + Array_in[AE_DSP_CH_FC][ii])/3.0f;
+	}
 }
 
 void from_quad_side_to_5_1_side( float **Array_in, float **Array_out, unsigned int Samples )
 {
+	memcpy( Array_out[AE_DSP_CH_FL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_FR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_SL], Array_in[AE_DSP_CH_SL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_SR], Array_in[AE_DSP_CH_SR], Samples*sizeof(float) );
+
+	for( unsigned int ii = 0; ii < Samples; ii++ )
+	{
+		Array_out[AE_DSP_CH_FC][ii] = (Array_in[AE_DSP_CH_FL][ii] + Array_in[AE_DSP_CH_FR][ii])/2.0f;
+		Array_out[AE_DSP_CH_LFE][ii] = (Array_in[AE_DSP_CH_FL][ii] + Array_in[AE_DSP_CH_FR][ii] 
+										+ Array_in[AE_DSP_CH_SL][ii] + Array_in[AE_DSP_CH_SL][ii])/4.0f;
+	}
 }
 
 void from_3_1_to_5_1_side( float **Array_in, float **Array_out, unsigned int Samples )
 {
+	memcpy( Array_out[AE_DSP_CH_FL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_FR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_FC], Array_in[AE_DSP_CH_FC], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_LFE], Array_in[AE_DSP_CH_LFE], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_SL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_SR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
 }
 
 void from_5_0_side_to_5_1_side( float **Array_in, float **Array_out, unsigned int Samples )
 {
+	memcpy( Array_out[AE_DSP_CH_FL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_FR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_FC], Array_in[AE_DSP_CH_FC], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_SL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_SR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
+
+	for( unsigned int ii = 0; ii < Samples; ii++ )
+	{
+		Array_out[AE_DSP_CH_LFE][ii] = (Array_in[AE_DSP_CH_FL][ii] + Array_in[AE_DSP_CH_FR][ii] 
+										+ Array_in[AE_DSP_CH_FC][ii] + Array_in[AE_DSP_CH_SL][ii] + Array_in[AE_DSP_CH_SR][ii])/5.0f;
+	}
 }
 
 void from_4_1_side_to_5_1_side( float **Array_in, float **Array_out, unsigned int Samples )
 {
+	memcpy( Array_out[AE_DSP_CH_FL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_FR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_LFE], Array_in[AE_DSP_CH_LFE], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_SL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_SR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
+
+	for( unsigned int ii = 0; ii < Samples; ii++ )
+	{
+		Array_out[AE_DSP_CH_FC][ii] = (Array_in[AE_DSP_CH_FL][ii] + Array_in[AE_DSP_CH_FR][ii])/2.0f;
+	}
 }
 
 // functions for upmixing to 7_0_side
@@ -806,42 +862,110 @@ void from_mono_to_7_0( float **Array_in, float **Array_out, unsigned int Samples
 
 void from_stereo_to_7_0( float **Array_in, float **Array_out, unsigned int Samples )
 {
-	memcpy( Array_out[AE_DSP_CH_FL], Array_in[AE_DSP_CH_FC], Samples*sizeof(float) );
-	memcpy( Array_out[AE_DSP_CH_FR], Array_in[AE_DSP_CH_FC], Samples*sizeof(float) );
-	memcpy( Array_out[AE_DSP_CH_FC], Array_in[AE_DSP_CH_FC], Samples*sizeof(float) );
-	memcpy( Array_out[AE_DSP_CH_LFE], Array_in[AE_DSP_CH_FC], Samples*sizeof(float) );
-	memcpy( Array_out[AE_DSP_CH_BL], Array_in[AE_DSP_CH_FC], Samples*sizeof(float) );
-	memcpy( Array_out[AE_DSP_CH_BR], Array_in[AE_DSP_CH_FC], Samples*sizeof(float) );
-	memcpy( Array_out[AE_DSP_CH_SL], Array_in[AE_DSP_CH_FC], Samples*sizeof(float) );
-	memcpy( Array_out[AE_DSP_CH_SR], Array_in[AE_DSP_CH_FC], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_FL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_FR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_BL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_BR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_SL], Array_in[AE_DSP_CH_SL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_SR], Array_in[AE_DSP_CH_SR], Samples*sizeof(float) );
+
+	for( unsigned int ii = 0; ii < Samples; ii++ )
+	{
+		Array_out[AE_DSP_CH_FC][ii] = (Array_in[AE_DSP_CH_FL][ii] + Array_in[AE_DSP_CH_FR][ii])/2.0f;
+	}
 }
 
 void from_2_1_to_7_0( float **Array_in, float **Array_out, unsigned int Samples )
 {
+	for( unsigned int ii = 0; ii < Samples; ii++ )
+	{
+		Array_out[AE_DSP_CH_FL][ii] = (Array_in[AE_DSP_CH_FL][ii] + Array_in[AE_DSP_CH_LFE][ii])/2.0f;
+		Array_out[AE_DSP_CH_FR][ii] = (Array_in[AE_DSP_CH_FR][ii] + Array_in[AE_DSP_CH_LFE][ii])/2.0f;
+		Array_out[AE_DSP_CH_FC][ii] = (Array_in[AE_DSP_CH_FR][ii] + Array_in[AE_DSP_CH_FR][ii] + Array_in[AE_DSP_CH_LFE][ii])/3.0f;
+		Array_out[AE_DSP_CH_BL][ii] = (Array_in[AE_DSP_CH_FL][ii] + Array_in[AE_DSP_CH_LFE][ii])/2.0f;
+		Array_out[AE_DSP_CH_BR][ii] = (Array_in[AE_DSP_CH_FR][ii] + Array_in[AE_DSP_CH_LFE][ii])/2.0f;
+		Array_out[AE_DSP_CH_SL][ii] = (Array_in[AE_DSP_CH_FL][ii] + Array_in[AE_DSP_CH_LFE][ii])/2.0f;
+		Array_out[AE_DSP_CH_SR][ii] = (Array_in[AE_DSP_CH_FR][ii] + Array_in[AE_DSP_CH_LFE][ii])/2.0f;
+	}
 }
 
 void from_3_0_to_7_0( float **Array_in, float **Array_out, unsigned int Samples )
 {
+	memcpy( Array_out[AE_DSP_CH_FL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_FR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_FC], Array_in[AE_DSP_CH_FC], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_BL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_BR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_SL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_SR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
 }
 
 void from_quad_side_to_7_0( float **Array_in, float **Array_out, unsigned int Samples )
 {
+	memcpy( Array_out[AE_DSP_CH_FL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_FR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_BL], Array_in[AE_DSP_CH_SL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_BR], Array_in[AE_DSP_CH_SR], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_SL], Array_in[AE_DSP_CH_SL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_SR], Array_in[AE_DSP_CH_SR], Samples*sizeof(float) );
+
+	for( unsigned int ii = 0; ii < Samples; ii++ )
+	{
+		Array_out[AE_DSP_CH_FC][ii] = (Array_in[AE_DSP_CH_FL][ii] + Array_in[AE_DSP_CH_FR][ii])/2.0f;
+	}
 }
 
 void from_3_1_to_7_0( float **Array_in, float **Array_out, unsigned int Samples )
 {
+	for( unsigned int ii = 0; ii < Samples; ii++ )
+	{
+		Array_out[AE_DSP_CH_FL][ii] = (Array_in[AE_DSP_CH_FL][ii] + Array_in[AE_DSP_CH_LFE][ii])/2.0f;
+		Array_out[AE_DSP_CH_FR][ii] = (Array_in[AE_DSP_CH_FR][ii] + Array_in[AE_DSP_CH_LFE][ii])/2.0f;
+		Array_out[AE_DSP_CH_FC][ii] = (Array_in[AE_DSP_CH_FR][ii] + Array_in[AE_DSP_CH_FR][ii] + Array_in[AE_DSP_CH_LFE][ii])/3.0f;
+		Array_out[AE_DSP_CH_BL][ii] = (Array_in[AE_DSP_CH_FL][ii] + Array_in[AE_DSP_CH_LFE][ii])/2.0f;
+		Array_out[AE_DSP_CH_BR][ii] = (Array_in[AE_DSP_CH_FR][ii] + Array_in[AE_DSP_CH_LFE][ii])/2.0f;
+		Array_out[AE_DSP_CH_SL][ii] = (Array_in[AE_DSP_CH_FL][ii] + Array_in[AE_DSP_CH_LFE][ii])/2.0f;
+		Array_out[AE_DSP_CH_SR][ii] = (Array_in[AE_DSP_CH_FR][ii] + Array_in[AE_DSP_CH_LFE][ii])/2.0f;
+	}
 }
 
 void from_5_0_side_to_7_0( float **Array_in, float **Array_out, unsigned int Samples )
 {
+	memcpy( Array_out[AE_DSP_CH_FL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_FR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_FC], Array_in[AE_DSP_CH_FC], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_BL], Array_in[AE_DSP_CH_SL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_BR], Array_in[AE_DSP_CH_SR], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_SL], Array_in[AE_DSP_CH_SL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_SR], Array_in[AE_DSP_CH_SR], Samples*sizeof(float) );
 }
 
 void from_4_1_side_to_7_0( float **Array_in, float **Array_out, unsigned int Samples )
 {
+	for( unsigned int ii = 0; ii < Samples; ii++ )
+	{
+		Array_out[AE_DSP_CH_FL][ii] = (Array_in[AE_DSP_CH_FL][ii] + Array_in[AE_DSP_CH_LFE][ii])/2.0f;
+		Array_out[AE_DSP_CH_FR][ii] = (Array_in[AE_DSP_CH_FR][ii] + Array_in[AE_DSP_CH_LFE][ii])/2.0f;
+		Array_out[AE_DSP_CH_FC][ii] = (Array_in[AE_DSP_CH_FR][ii] + Array_in[AE_DSP_CH_FR][ii] + Array_in[AE_DSP_CH_LFE][ii])/3.0f;
+		Array_out[AE_DSP_CH_BL][ii] = (Array_in[AE_DSP_CH_SL][ii] + Array_in[AE_DSP_CH_LFE][ii])/2.0f;
+		Array_out[AE_DSP_CH_BR][ii] = (Array_in[AE_DSP_CH_SR][ii] + Array_in[AE_DSP_CH_LFE][ii])/2.0f;
+		Array_out[AE_DSP_CH_SL][ii] = (Array_in[AE_DSP_CH_SL][ii] + Array_in[AE_DSP_CH_LFE][ii])/2.0f;
+		Array_out[AE_DSP_CH_SR][ii] = (Array_in[AE_DSP_CH_SR][ii] + Array_in[AE_DSP_CH_LFE][ii])/2.0f;
+	}
 }
 
 void from_5_1_to_7_0( float **Array_in, float **Array_out, unsigned int Samples )
 {
+	for( unsigned int ii = 0; ii < Samples; ii++ )
+	{
+		Array_out[AE_DSP_CH_FL][ii] = (Array_in[AE_DSP_CH_FL][ii] + Array_in[AE_DSP_CH_LFE][ii])/2.0f;
+		Array_out[AE_DSP_CH_FR][ii] = (Array_in[AE_DSP_CH_FR][ii] + Array_in[AE_DSP_CH_LFE][ii])/2.0f;
+		Array_out[AE_DSP_CH_FC][ii] = (Array_in[AE_DSP_CH_FC][ii] + Array_in[AE_DSP_CH_LFE][ii])/2.0f;
+		Array_out[AE_DSP_CH_BL][ii] = (Array_in[AE_DSP_CH_SL][ii] + Array_in[AE_DSP_CH_LFE][ii])/2.0f;
+		Array_out[AE_DSP_CH_BR][ii] = (Array_in[AE_DSP_CH_SR][ii] + Array_in[AE_DSP_CH_LFE][ii])/2.0f;
+		Array_out[AE_DSP_CH_SL][ii] = (Array_in[AE_DSP_CH_SL][ii] + Array_in[AE_DSP_CH_LFE][ii])/2.0f;
+		Array_out[AE_DSP_CH_SR][ii] = (Array_in[AE_DSP_CH_SR][ii] + Array_in[AE_DSP_CH_LFE][ii])/2.0f;
+	}
 }
 
 // functions for upmixing to 7_1
@@ -860,13 +984,12 @@ void from_mono_to_7_1( float **Array_in, float **Array_out, unsigned int Samples
 void from_stereo_to_7_1( float **Array_in, float **Array_out, unsigned int Samples )
 {
 	memcpy( Array_out[AE_DSP_CH_FL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
-	memcpy( Array_out[AE_DSP_CH_BL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
-	memcpy( Array_out[AE_DSP_CH_SL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
-	
 	memcpy( Array_out[AE_DSP_CH_FR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_BL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
 	memcpy( Array_out[AE_DSP_CH_BR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_SL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
 	memcpy( Array_out[AE_DSP_CH_SR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
-
+	
 	// sum up FR, FL to LFE & FC
 	for( unsigned int ii = 0; ii < Samples; ii++ )
 	{
@@ -877,32 +1000,129 @@ void from_stereo_to_7_1( float **Array_in, float **Array_out, unsigned int Sampl
 
 void from_2_1_to_7_1( float **Array_in, float **Array_out, unsigned int Samples )
 {
+	memcpy( Array_out[AE_DSP_CH_FL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_FR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_LFE], Array_in[AE_DSP_CH_LFE], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_BL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_BR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_SL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_SR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
+	
+	// sum up FR, FL to LFE & FC
+	for( unsigned int ii = 0; ii < Samples; ii++ )
+	{
+		Array_out[AE_DSP_CH_FC][ii] = (Array_in[AE_DSP_CH_FL][ii] + Array_in[AE_DSP_CH_FR][ii])/2.0f;
+	}
 }
 
 void from_3_0_to_7_1( float **Array_in, float **Array_out, unsigned int Samples )
 {
+	memcpy( Array_out[AE_DSP_CH_FL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_FR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_FC], Array_in[AE_DSP_CH_FC], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_BL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_BR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_SL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_SR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
+	
+	// sum up FR, FL to LFE & FC
+	for( unsigned int ii = 0; ii < Samples; ii++ )
+	{
+		Array_out[AE_DSP_CH_LFE][ii] = (Array_in[AE_DSP_CH_FL][ii] + Array_in[AE_DSP_CH_FR][ii] + Array_in[AE_DSP_CH_FC][ii])/3.0f;
+	}
 }
 
 void from_quad_side_to_7_1( float **Array_in, float **Array_out, unsigned int Samples )
 {
+	memcpy( Array_out[AE_DSP_CH_FL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_FR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_BL], Array_in[AE_DSP_CH_SL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_BR], Array_in[AE_DSP_CH_SR], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_SL], Array_in[AE_DSP_CH_SL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_SR], Array_in[AE_DSP_CH_SR], Samples*sizeof(float) );
+	
+	// sum up FR, FL to LFE & FC
+	for( unsigned int ii = 0; ii < Samples; ii++ )
+	{
+		Array_out[AE_DSP_CH_FC][ii] = (Array_in[AE_DSP_CH_FL][ii] + Array_in[AE_DSP_CH_FR][ii])/2.0f;
+		Array_out[AE_DSP_CH_LFE][ii] = (Array_in[AE_DSP_CH_FL][ii] + Array_in[AE_DSP_CH_FR][ii] 
+										+ Array_in[AE_DSP_CH_SL][ii] + Array_in[AE_DSP_CH_SR][ii])/4.0f;
+	}
 }
 
 void from_3_1_to_7_1( float **Array_in, float **Array_out, unsigned int Samples )
 {
+	memcpy( Array_out[AE_DSP_CH_FL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_FR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_FR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_FC], Array_in[AE_DSP_CH_FC], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_LFE], Array_in[AE_DSP_CH_LFE], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_BL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_BR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_SL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_SR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
 }
 
 void from_5_0_side_to_7_1( float **Array_in, float **Array_out, unsigned int Samples )
 {
+	memcpy( Array_out[AE_DSP_CH_FL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_FR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_FC], Array_in[AE_DSP_CH_FC], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_BL], Array_in[AE_DSP_CH_SL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_BR], Array_in[AE_DSP_CH_SR], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_SL], Array_in[AE_DSP_CH_SL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_SR], Array_in[AE_DSP_CH_SR], Samples*sizeof(float) );
+	
+	for( unsigned int ii = 0; ii < Samples; ii++ )
+	{
+		Array_out[AE_DSP_CH_LFE][ii] = (Array_in[AE_DSP_CH_FL][ii] + Array_in[AE_DSP_CH_FR][ii] 
+										+ Array_in[AE_DSP_CH_FC][ii] + Array_in[AE_DSP_CH_SL][ii] + Array_in[AE_DSP_CH_SR][ii])/5.0f;
+	}
 }
 
 void from_4_1_side_to_7_1( float **Array_in, float **Array_out, unsigned int Samples )
 {
+	memcpy( Array_out[AE_DSP_CH_FL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_FR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_LFE], Array_in[AE_DSP_CH_LFE], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_BL], Array_in[AE_DSP_CH_SL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_BR], Array_in[AE_DSP_CH_SR], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_SL], Array_in[AE_DSP_CH_SL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_SR], Array_in[AE_DSP_CH_SR], Samples*sizeof(float) );
+
+	for( unsigned int ii = 0; ii < Samples; ii++ )
+	{
+		Array_out[AE_DSP_CH_FC][ii] = (Array_in[AE_DSP_CH_FL][ii] + Array_in[AE_DSP_CH_FR][ii])/2.0f;
+	}
 }
 
 void from_5_1_to_7_1( float **Array_in, float **Array_out, unsigned int Samples )
 {
+	memcpy( Array_out[AE_DSP_CH_FL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_FR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_FC], Array_in[AE_DSP_CH_FC], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_LFE], Array_in[AE_DSP_CH_LFE], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_BL], Array_in[AE_DSP_CH_SL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_BR], Array_in[AE_DSP_CH_SR], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_SL], Array_in[AE_DSP_CH_SL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_SR], Array_in[AE_DSP_CH_SR], Samples*sizeof(float) );
 }
 
 void from_7_0_to_7_1( float **Array_in, float **Array_out, unsigned int Samples )
 {
+	memcpy( Array_out[AE_DSP_CH_FL], Array_in[AE_DSP_CH_FL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_FR], Array_in[AE_DSP_CH_FR], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_FC], Array_in[AE_DSP_CH_FC], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_BL], Array_in[AE_DSP_CH_BL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_BR], Array_in[AE_DSP_CH_BR], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_SL], Array_in[AE_DSP_CH_SL], Samples*sizeof(float) );
+	memcpy( Array_out[AE_DSP_CH_SR], Array_in[AE_DSP_CH_SR], Samples*sizeof(float) );
+
+	for( unsigned int ii = 0; ii < Samples; ii++ )
+	{
+		Array_out[AE_DSP_CH_LFE][ii] = (Array_in[AE_DSP_CH_FL][ii] + Array_in[AE_DSP_CH_FR][ii] 
+										+ Array_in[AE_DSP_CH_FC][ii]
+										+ Array_in[AE_DSP_CH_BL][ii] + Array_in[AE_DSP_CH_BR][ii]
+										+ Array_in[AE_DSP_CH_SL][ii] + Array_in[AE_DSP_CH_SR][ii])/7.0f;
+	}
 }
