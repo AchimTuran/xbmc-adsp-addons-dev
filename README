@@ -1,11 +1,22 @@
-=============================
+Here you will find ADSP addons for XBMC.
+
+========================================
+       Included ADSP Addons
+========================================
+- adsp template:
+    You can use this template to see how ADSP Addon API works or to start a new ADSP Addon.
+	Preprocessing only copies input to output.
+	Master process implements channel upmixing (e.g. stereo to 5.1) by copying the input channel to output channels.
+	Postprocessing copies input samples to output.
+
+========================================
        ADSP Addon API Documentation
-=============================
+========================================
 For more details see: http://wisler.bplaced.de/xbmc-adsp-addons/
 
-=============================
+========================================
        Linux, OS-X, BSD
-=============================
+========================================
 
 Start by executing:
 ./bootstrap
@@ -36,9 +47,9 @@ List of addons with dependencies:
     Build dependencies:
     Runtime dependencies:
 
-=============================
+========================================
            Windows
-=============================
+========================================
 Building the adsp addons standalone:
 -----------------------------------
 Prepare:
