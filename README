@@ -1,4 +1,9 @@
 =============================
+       ADSP Addon API Documentation
+=============================
+For more details see: http://wisler.bplaced.de/xbmc-adsp-addons/
+
+=============================
        Linux, OS-X, BSD
 =============================
 
@@ -27,11 +32,9 @@ can enable the build of addons with dependencies:
 
 List of addons with dependencies:
 ---------------------------------
-- MythTV addon:
-    Build dependencies:   libmysqlclient, boost (headers)
-    Runtime dependencies: libmysqlclient
-- IPTV Simple addon:
-    Build dependencies:   zlib
+- adsp template:
+    Build dependencies:
+    Runtime dependencies:
 
 =============================
            Windows
