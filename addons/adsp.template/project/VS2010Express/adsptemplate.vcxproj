@@ -101,27 +101,6 @@
     <None Include="..\..\addon\resources\skins\Confluence\720p\DialogSpeakerGain.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\xbmc\DVDDemuxPacket.h" />
-    <ClInclude Include="..\..\..\..\xbmc\libXBMC_addon.h" />
-    <ClInclude Include="..\..\..\..\xbmc\libXBMC_adsp.h" />
-    <ClInclude Include="..\..\..\..\xbmc\libXBMC_codec.h" />
-    <ClInclude Include="..\..\..\..\xbmc\libXBMC_gui.h" />
-    <ClInclude Include="..\..\..\..\xbmc\libXBMC_pvr.h" />
-    <ClInclude Include="..\..\..\..\xbmc\xbmc_addon_cpp_dll.h" />
-    <ClInclude Include="..\..\..\..\xbmc\xbmc_addon_dll.h" />
-    <ClInclude Include="..\..\..\..\xbmc\xbmc_addon_types.h" />
-    <ClInclude Include="..\..\..\..\xbmc\xbmc_adsp_dll.h" />
-    <ClInclude Include="..\..\..\..\xbmc\xbmc_adsp_types.h" />
-    <ClInclude Include="..\..\..\..\xbmc\xbmc_codec_descriptor.hpp" />
-    <ClInclude Include="..\..\..\..\xbmc\xbmc_codec_types.h" />
-    <ClInclude Include="..\..\..\..\xbmc\xbmc_epg_types.h" />
-    <ClInclude Include="..\..\..\..\xbmc\xbmc_pvr_dll.h" />
-    <ClInclude Include="..\..\..\..\xbmc\xbmc_pvr_types.h" />
-    <ClInclude Include="..\..\..\..\xbmc\xbmc_scr_dll.h" />
-    <ClInclude Include="..\..\..\..\xbmc\xbmc_scr_types.h" />
-    <ClInclude Include="..\..\..\..\xbmc\xbmc_stream_utils.hpp" />
-    <ClInclude Include="..\..\..\..\xbmc\xbmc_vis_dll.h" />
-    <ClInclude Include="..\..\..\..\xbmc\xbmc_vis_types.h" />
     <ClInclude Include="..\..\src\ADDONOptional.h" />
     <ClInclude Include="..\..\src\channelUpmixer.h" />
     <ClInclude Include="..\..\src\Dialogs\GUIDialogMasterProcess.h" />

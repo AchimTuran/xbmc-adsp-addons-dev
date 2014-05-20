@@ -34,9 +34,6 @@
     <Filter Include="template\include">
       <UniqueIdentifier>{391eb27f-671f-462a-bb09-ed84900804ac}</UniqueIdentifier>
     </Filter>
-    <Filter Include="xbmc_dll">
-      <UniqueIdentifier>{2397d3be-e502-499a-9e4a-69fa91dbb2bb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Dialogs">
       <UniqueIdentifier>{89cc2491-4431-4e85-a663-6f9cf673e2d1}</UniqueIdentifier>
     </Filter>
@@ -77,69 +74,6 @@
     <ClInclude Include="..\..\src\DSPProcessor.h" />
     <ClInclude Include="..\..\src\template\include\checkTemplateConfig.h">
       <Filter>template\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\xbmc\xbmc_vis_dll.h">
-      <Filter>xbmc_dll</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\xbmc\xbmc_vis_types.h">
-      <Filter>xbmc_dll</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\xbmc\DVDDemuxPacket.h">
-      <Filter>xbmc_dll</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\xbmc\libXBMC_addon.h">
-      <Filter>xbmc_dll</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\xbmc\libXBMC_adsp.h">
-      <Filter>xbmc_dll</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\xbmc\libXBMC_codec.h">
-      <Filter>xbmc_dll</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\xbmc\libXBMC_gui.h">
-      <Filter>xbmc_dll</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\xbmc\libXBMC_pvr.h">
-      <Filter>xbmc_dll</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\xbmc\xbmc_addon_cpp_dll.h">
-      <Filter>xbmc_dll</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\xbmc\xbmc_addon_dll.h">
-      <Filter>xbmc_dll</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\xbmc\xbmc_addon_types.h">
-      <Filter>xbmc_dll</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\xbmc\xbmc_adsp_dll.h">
-      <Filter>xbmc_dll</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\xbmc\xbmc_adsp_types.h">
-      <Filter>xbmc_dll</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\xbmc\xbmc_codec_descriptor.hpp">
-      <Filter>xbmc_dll</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\xbmc\xbmc_codec_types.h">
-      <Filter>xbmc_dll</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\xbmc\xbmc_epg_types.h">
-      <Filter>xbmc_dll</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\xbmc\xbmc_pvr_dll.h">
-      <Filter>xbmc_dll</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\xbmc\xbmc_pvr_types.h">
-      <Filter>xbmc_dll</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\xbmc\xbmc_scr_dll.h">
-      <Filter>xbmc_dll</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\xbmc\xbmc_scr_types.h">
-      <Filter>xbmc_dll</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\xbmc\xbmc_stream_utils.hpp">
-      <Filter>xbmc_dll</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\template\include\IADSPProcessor.h">
       <Filter>template\include</Filter>
